@@ -1,2 +1,2 @@
 # Concepts_and_Learning
-This repository is used to store notes of things that I am learn 
+Documentation of me learning progress and notes.
