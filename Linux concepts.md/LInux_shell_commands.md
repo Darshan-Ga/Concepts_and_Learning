@@ -59,5 +59,21 @@
 * **`&&` (Logical AND)** : Run Command 1, and IF it is successful, immediately run Command 2.
 * **`tee` (The T-Junction)** : Print the output to the screen AND save it to a file at the exact same time.
 
+## System Diagnostics & Troubleshooting
+
+**Overview:** When a server's CPU spikes to 100% or an application freezes, these are the commands engineers use to diagnose the hardware, locate the rogue process, and terminate it.
+
+* **`top`** : Opens a live, constantly updating dashboard of all running processes, sorted by CPU and RAM usage. (Press `q` to exit).
+* **`ps`** : Takes a static snapshot of currently running processes.
+  * *Pro-Tip:* Use `ps aux | grep [name]` to instantly search if a specific application (like a web server) is running.
+* **`fuser`** : Identifies exactly which process is using a specific file, directory, or network port.
+* **`kill`** : Terminates a process using its Process ID (PID).
+  * `-9` : The "Force Kill" flag. (e.g., `kill -9 1234`). It forces the system to instantly destroy the process without letting it save data or shut down cleanly.
+* **`nohup` (No Hangup)** : Prevents a background process from being terminated when the user logs out or disconnects from the terminal.
+  * *Standard Syntax:* `nohup [command] &`
+* **`free`** : Displays the total, used, and available RAM (Memory) on the server.
+  * `-h` : Human-readable format (displays in MB/GB).
+* **`vmstat`** : Reports comprehensive virtual memory statistics, including CPU activity, block IO, and system processes.
+
 ---
 *Note: This playbook is a living document. As I learn more and encounter new DevOps concepts, I am going to continually update this list.*
