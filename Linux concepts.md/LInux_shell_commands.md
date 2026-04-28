@@ -75,5 +75,28 @@
   * `-h` : Human-readable format (displays in MB/GB).
 * **`vmstat`** : Reports comprehensive virtual memory statistics, including CPU activity, block IO, and system processes.
 
+## 🕵️‍♂️ Data Forensics & Manipulation
+
+**Overview:** When investigating compromised servers, cleaning messy logs, or extracting hidden malware payloads, engineers use these commands to filter data, decode strings, and manage compressed archives.
+
+* **`grep`** : Searches through files or terminal output for a specific word, phrase, or pattern.
+  * *Pro-Tip:* Use `-i` to ignore uppercase/lowercase, and `-v` to invert the match (print everything that *doesn't* match).
+* **`sort`** : Organizes the lines of a text file alphabetically or mathematically.
+  * `-n` : Sorts numerically (treating "10" as bigger than "2").
+* **`uniq`** : Filters out adjacent, duplicate lines in a file. 
+  * *Pro-Tip:* Always pipe data through `sort` first! Use `-u` to show *only* strictly unique lines, or `-c` to count how many times a line appeared.
+* **`tr`** : Translates or deletes specific characters from standard output.
+  * *Standard Syntax:* `cat file.txt | tr '[old_chars]' '[new_chars]'`
+* **`strings`** : Extracts only human-readable text from compiled binaries or unreadable files, ignoring the machine code.
+* **`base64`** : Encodes or decodes data into the Base64 standard, often used to safely transmit complex data.
+  * `-d` : Decodes the Base64 string back into normal text.
+* **`xxd`** : Generates a hex dump of a file, showing the raw hexadecimal bytes alongside their ASCII text translation.
+  * *Pro-Tip:* Run `xxd [file] | head` to quickly check a file's header (magic bytes) to see if an attacker faked the file extension.
+* **`tar`** : Archives (glues) multiple files and directories together into one single file called a tarball. It does *not* compress size.
+  * *Standard Syntax:* `tar -cvf` to create an archive, and `tar -xvf` to extract it.
+* **`gzip`** : Compresses files to save disk space. Often used on tarballs to create `.tar.gz` files.
+  * `-d` : Decompresses the file (e.g., `gzip -d file.gz`).
+* **`bzip2`** : An alternative compression tool. It shrinks files smaller than `gzip`, but uses more CPU power to do it.
+  * `-d` : Decompresses the file (e.g., `bzip2 -d file.bz2`).
 ---
 *Note: This playbook is a living document. As I learn more and encounter new DevOps concepts, I am going to continually update this list.*
