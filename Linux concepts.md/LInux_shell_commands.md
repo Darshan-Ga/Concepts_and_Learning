@@ -98,5 +98,37 @@
   * `-d` : Decompresses the file (e.g., `gzip -d file.gz`).
 * **`bzip2`** : An alternative compression tool. It shrinks files smaller than `gzip`, but uses more CPU power to do it.
   * `-d` : Decompresses the file (e.g., `bzip2 -d file.bz2`).
+
+   ## ⚖️ System Governance & Environment Forensics
+
+📝 **Overview:** These commands provide "situational awareness." They are used to verify your identity, check system health, and manage software packages across different Linux distributions.
+
+### 👤 Identity & Permissions
+* 🆔 **`whoami`** : Displays the username of the current active session.
+  * 💡 *Use Case:* Verify if a privilege escalation (like `sudo`) successfully changed your user status.
+* 🪪 **`id`** : Prints your User ID (UID) and Group IDs (GID).
+  * 💡 *Cybersec Tip:* Essential for finding "hidden" group permissions that allow you to read restricted files.
+* 🛡️ **`sudo`** (SuperUser Do) : Executes a command with root/administrative privileges.
+  * 🛑 *Rule:* Only use this when the system denies access to a standard user.
+
+### 🖥️ System Diagnostics
+* 🛰️ **`uname`** : Displays system and kernel information.
+  * ⌨️ `-a` : Shows the kernel version, which is critical for identifying system-level vulnerabilities.
+* ⏱️ **`uptime`** : Shows how long the system has been running and the current CPU load.
+* 📅 **`date`** : Displays the current system time.
+  * 💡 *Use Case:* Crucial for matching log file timestamps to real-world attack times.
+* 📍 **`which`** : Shows the full path of an executable command.
+  * ⌨️ *Example:* `which python3` tells you exactly which version of Python the system is using.
+
+### 📦 Package Management (Distro Families)
+* 🛒 **`apt`** : The standard manager for **Debian/Ubuntu** (used in Bandit & TryHackMe).
+* 📦 **`dnf` / `yum`** : The modern and legacy managers for **RHEL/CentOS/Fedora**.
+* 🏹 **`pacman`** : The lightweight manager for **Arch Linux**.
+* ❄️ **`portage`** : The advanced, source-based manager for **Gentoo**.
+
+### 🔌 Power & Session Control
+* 🔄 **`reboot`** : Restarts the hardware.
+* 🔌 **`shutdown`** : Powers off the machine.
+  * ⌨️ `sudo shutdown -h now` : Forces an immediate halt of all processes.
 ---
 *Note: This playbook is a living document. As I learn more and encounter new DevOps concepts, I am going to continually update this list.*
