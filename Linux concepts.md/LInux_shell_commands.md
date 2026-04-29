@@ -13,6 +13,8 @@
 * **`touch`** : Create a brand new, empty file instantly.
 * **`ln`** : Create a link (Hard link by default).
   * `-s` : Create a Soft Link (Shortcut/Pointer).
+    
+---
 
 ## 🔍 2. Reconnaissance & Search (The Security Tools)
 * **`find`** : Search the filesystem by metadata.
@@ -31,12 +33,16 @@
   * `-i` : Output the MIME type string.
 * **`grep`** : Search for specific words or patterns *inside* a file.
 
+---
+
 ## 💾 3. Storage Management (The DevOps Audits)
 * **`du` (Disk Usage)** : Check the size of specific directories/files.
   * `-h` : Human-readable (K, M, G).
   * `-s` : Summarize (only show total, don't list contents).
   * `-c` : Provide a grand total at the bottom.
 * **`df` (Disk Free)** : Check the total capacity and available space on the entire hard drive.
+  
+---
 
 ## ✂️ 4. Data Manipulation (The Text Slicers)
 * **`wc` (Word Count)** : Count lines, words, or bytes in a file.
@@ -45,10 +51,14 @@
 * **`cut`** : Slice text vertically (by columns) based on a delimiter.
 * **`sort`** : Alphabetize text.
   * `-n` : Sort numerically (prevents `10` from being placed before `2`).
+ 
+ ---
 
 ## 📖 5. Text Pagers (Reading Massive Files)
 * **`less`** : The modern standard. Loads one screen at a time. Allows scrolling up (`b`), down (`Spacebar`), and searching (`/`).
 * **`more`** : The legacy tool. Only allows scrolling down. (Avoid using).
+
+---
 
 ## ⚙️ 6. Operators & Pipelines (The Glue)
 * **`>` (Standard Output / Overwrite)** : Send output to a file and delete anything previously in that file.
@@ -58,6 +68,8 @@
 * **`&` (Background Operator)** : Run a command in the background and immediately return control of the terminal to the user.
 * **`&&` (Logical AND)** : Run Command 1, and IF it is successful, immediately run Command 2.
 * **`tee` (The T-Junction)** : Print the output to the screen AND save it to a file at the exact same time.
+
+---
 
 ## System Diagnostics & Troubleshooting
 
@@ -74,6 +86,8 @@
 * **`free`** : Displays the total, used, and available RAM (Memory) on the server.
   * `-h` : Human-readable format (displays in MB/GB).
 * **`vmstat`** : Reports comprehensive virtual memory statistics, including CPU activity, block IO, and system processes.
+  
+---
 
 ## 🕵️‍♂️ Data Forensics & Manipulation
 
@@ -98,6 +112,8 @@
   * `-d` : Decompresses the file (e.g., `gzip -d file.gz`).
 * **`bzip2`** : An alternative compression tool. It shrinks files smaller than `gzip`, but uses more CPU power to do it.
   * `-d` : Decompresses the file (e.g., `bzip2 -d file.bz2`).
+  * 
+---
 
    ## ⚖️ System Governance & Environment Forensics
 
@@ -110,6 +126,8 @@
   * 💡 *Cybersec Tip:* Essential for finding "hidden" group permissions that allow you to read restricted files.
 * 🛡️ **`sudo`** (SuperUser Do) : Executes a command with root/administrative privileges.
   * 🛑 *Rule:* Only use this when the system denies access to a standard user.
+    
+---
 
 ### 🖥️ System Diagnostics
 * 🛰️ **`uname`** : Displays system and kernel information.
@@ -119,16 +137,78 @@
   * 💡 *Use Case:* Crucial for matching log file timestamps to real-world attack times.
 * 📍 **`which`** : Shows the full path of an executable command.
   * ⌨️ *Example:* `which python3` tells you exactly which version of Python the system is using.
+    
+---
 
 ### 📦 Package Management (Distro Families)
 * 🛒 **`apt`** : The standard manager for **Debian/Ubuntu** (used in Bandit & TryHackMe).
 * 📦 **`dnf` / `yum`** : The modern and legacy managers for **RHEL/CentOS/Fedora**.
 * 🏹 **`pacman`** : The lightweight manager for **Arch Linux**.
 * ❄️ **`portage`** : The advanced, source-based manager for **Gentoo**.
+  
+---
 
 ### 🔌 Power & Session Control
 * 🔄 **`reboot`** : Restarts the hardware.
 * 🔌 **`shutdown`** : Powers off the machine.
   * ⌨️ `sudo shutdown -h now` : Forces an immediate halt of all processes.
+ 
+---
+## 🛡️ User Administration & Remote Transfer
+
+📝 **Overview:** This module covers the core commands required to manage user identities, govern file access (permissions), and securely transfer data across networks. These are essential daily skills for Cloud Security and Server Administration.
+
+### 👥 User & Group Management (Identity)
+
+* 👤 **`useradd`** : Creates a new user account.
+  * ⌨️ `-m` : Creates the user's home directory (`/home/username`). *Always use this!*
+  * ⌨️ `-s /bin/bash` : Assigns the default shell so the user gets a proper terminal.
+* 🔑 **`passwd`** : Sets or updates a user's password.
+  * ⌨️ `-l` (Lock) : Locks an account so the user cannot log in (used for compromised accounts).
+  * ⌨️ `-u` (Unlock) : Unlocks a previously locked account.
+* 🗑️ **`userdel`** : Deletes a user account.
+  * ⌨️ `-r` : Completely wipes the user's home directory and files along with the account.
+* 🚪 **`su`** (Switch User) : Switches your terminal session to another user.
+  * ⌨️ `su - username` : The `-` is critical. It loads that user's full environment variables, not just their permissions.
+* 🏢 **`groupadd` / `groupdel`** : Creates or deletes a user group (e.g., `groupadd developers`).
+* 📋 **`gpasswd`** : Manages group memberships.
+  * ⌨️ `-a [user] [group]` : Adds a user to a group.
+  * ⌨️ `-d [user] [group]` : Removes a user from a group.
+
+---
+
+### 🔐 Ownership & Permissions (Access Control)
+
+* 👑 **`chown`** (Change Owner) : Transfers ownership of a file/folder.
+  * ⌨️ `chown user:group filename` : Changes both the owner and the group simultaneously.
+  * ⌨️ `-R` : Recursive. Changes ownership for a folder and everything inside it.
+* 🎭 **`chgrp`** : Changes only the group ownership of a file.
+* 🛑 **`chmod`** (Change Mode) : Modifies read, write, and execute permissions.
+  * ⌨️ `-R` : Recursive application to folders.
+  * 💡 *The Permission Math Cheat Sheet:*
+    * **Read (r) = 4** | **Write (w) = 2** | **Execute (x) = 1**
+    * `7` (4+2+1) = Full Access
+    * `6` (4+2) = Read/Write
+    * `5` (4+1) = Read/Execute
+    * *Example:* `chmod 755 script.sh` (Owner can do everything, Group and Others can only read/execute).
+* 🧮 **`umask`** : Sets the default security restrictions for any *new* file you create. It automatically subtracts permissions so new files aren't born fully exposed.
+
+---
+
+### 🚀 Remote Data Transfer (Network)
+
+* 📦 **`scp`** (Secure Copy Protocol) : Copies files over an encrypted SSH connection. Fast, secure, but starts over if the connection drops.
+  * ⬆️ **Push:** `scp local_file.txt user@192.168.1.10:/remote/path/`
+  * ⬇️ **Pull:** `scp user@192.168.1.10:/remote/file.txt /local/path/`
+  * 🚩 **Important Flags:**
+    * `-r` : Recursive (for copying folders).
+    * `-P` (Capital P) : Specifies a custom SSH port if the server isn't using the default port 22.
+* 🔄 **`rsync`** (Remote Sync) : The advanced transfer tool. It only copies the *differences* (deltas) between files and resumes automatically if the connection fails. Essential for large backups.
+  * ⌨️ **Syntax:** `rsync -avz /local/folder/ user@192.168.1.10:/remote/backup/`
+  * 🚩 **Important Flags:**
+    * `-a` (Archive) : Preserves all permissions, ownership, and timestamps.
+    * `-v` (Verbose) : Shows you exactly what is transferring on the screen.
+    * `-z` (Compress) : Zips the data during transit to save bandwidth.
+    * `--progress` : Displays a live progress bar.
 ---
 *Note: This playbook is a living document. As I learn more and encounter new DevOps concepts, I am going to continually update this list.*
