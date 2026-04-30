@@ -210,5 +210,51 @@
     * `-v` (Verbose) : Shows you exactly what is transferring on the screen.
     * `-z` (Compress) : Zips the data during transit to save bandwidth.
     * `--progress` : Displays a live progress bar.
+
+### 🔌 nc (Netcat) : The "Swiss Army Knife" of networking.
+
+Used for reading and writing raw data across network connections. It is the most basic way to "talk" to a specific port.
+
+* **Connect:** nc 192.168.1.10 30000 (Opens a pipe to send text to that port).
+
+* **Listen:** nc -l 4444 (Turns your machine into a temporary server waiting for a connection).
+
+  * 🚩 Important Flags:
+
+  * **-v :** Verbose; tells you if the connection was successful or failed.
+
+  * **-z :** Zero-I/O; used for scanning (it checks if a port is open without sending data).
+
+  * **-u :** Uses UDP instead of the default TCP.
+
+### 🔐 openssl s_client : The "Secret Handshake" envoy.
+
+Used to connect to services protected by SSL/TLS encryption. Essential when a raw tool like nc is rejected by a secure port.
+
+* **Connect:** openssl s_client -connect 192.168.1.10:30001
+
+  * ⌨️ Syntax: After the certificate data stops scrolling, type your message and hit Enter.
+
+  * 🚩 Important Flags:
+
+  -quiet : Hides the technical certificate/session data so you only see the text conversation.
+
+  -brief : Provides a very short summary of the connection security.
+
+* **🛰️ nmap (Network Mapper) :** The "Security Drone."
+The industry standard for discovering devices on a network and finding which "doors" (ports) are open.
+
+Basic Scan: nmap 192.168.1.10 (Scans the 1,000 most common ports).
+
+Specific Scan: nmap -p 80,443,30000-30005 192.168.1.10
+
+   * 🚩 Important Flags:
+
+   -sV : Version Detection; tries to determine exactly what software and version is running on a port.
+
+   -sS : TCP SYN Scan; a faster, "stealthier" way to scan without completing a full connection.
+
+   -O : OS Detection; attempts to guess if the server is running Linux, Windows, or another OS.
+
 ---
 *Note: This playbook is a living document. As I learn more and encounter new DevOps concepts, I am going to continually update this list.*
