@@ -210,6 +210,8 @@
     * `-v` (Verbose) : Shows you exactly what is transferring on the screen.
     * `-z` (Compress) : Zips the data during transit to save bandwidth.
     * `--progress` : Displays a live progress bar.
+      
+---
 
 ### 🔌 nc (Netcat) : The "Swiss Army Knife" of networking.
 
@@ -226,7 +228,9 @@ Used for reading and writing raw data across network connections. It is the most
   * **-z :** Zero-I/O; used for scanning (it checks if a port is open without sending data).
 
   * **-u :** Uses UDP instead of the default TCP.
-
+ 
+ ---
+ 
 ### 🔐 openssl s_client : The "Secret Handshake" envoy.
 
 Used to connect to services protected by SSL/TLS encryption. Essential when a raw tool like nc is rejected by a secure port.
@@ -240,6 +244,8 @@ Used to connect to services protected by SSL/TLS encryption. Essential when a ra
   -quiet : Hides the technical certificate/session data so you only see the text conversation.
 
   -brief : Provides a very short summary of the connection security.
+
+  ---
 
 * **🛰️ nmap (Network Mapper) :** The "Security Drone."
 The industry standard for discovering devices on a network and finding which "doors" (ports) are open.
