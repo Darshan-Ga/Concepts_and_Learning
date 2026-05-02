@@ -262,5 +262,70 @@ Specific Scan: nmap -p 80,443,30000-30005 192.168.1.10
 
    -O : OS Detection; attempts to guess if the server is running Linux, Windows, or another OS.
 
+   ## 🌐 The Networking Toolkit: Core Diagnostic Commands
+
+These commands form the foundation of network troubleshooting and security auditing in Linux. They allow us to map network paths, verify connectivity, and inspect open ports.
+
+### 1. `ifconfig` / `ip a` (Network Interface Configuration)
+*   **What it does:** Think of this as asking the server, "Who are you?" It displays your machine's current network configuration, including your local IP address, subnet mask, and MAC address. *(Note: `ip a` is the modern standard, while `ifconfig` is the legacy tool).*
+*   **How to use it:** 
+    ```bash
+    ip a
+    # or
+    ifconfig
+    ```
+*   **Important Flags:**
+    *   `ip -br a`: Prints the output in a clean, brief, and highly readable table format.
+    *   `ifconfig -a`: Shows all network interfaces, even the ones that are currently turned off.
+
+### 2. `ping` (Packet Internet Groper)
+*   **What it does:** The most basic connectivity test. It sends a tiny data packet (ICMP Echo Request) to a target server and waits for it to bounce back. It tells you *if* a server is alive and *how long* the trip took (latency).
+*   **How to use it:**
+    ```bash
+    ping google.com
+    ```
+*   **Important Flags:**
+    *   `-c [number]`: (Count) Stops the ping after a specific number of requests. Essential for scripting so your script doesn't run forever. (e.g., `ping -c 4 google.com`)
+    *   `-i [seconds]`: (Interval) Changes the wait time between pings. 
+
+### 3. `traceroute` / `tracepath` 
+*   **What it does:** If `ping` tells you the destination is reachable, `traceroute` maps the exact road you took to get there. It lists every single router (called a "hop") your data passes through. This is crucial for finding out exactly *where* a connection is failing.
+*   **How to use it:**
+    ```bash
+    traceroute google.com
+    ```
+*   **Important Flags:**
+    *   `-n`: (Numeric) Displays raw IP addresses instead of trying to resolve their domain names. This makes the command run significantly faster.
+    *   `-m [number]`: (Max Hops) Limits how far the trace will go before giving up (default is usually 30).
+
+### 4. `mtr` (My Traceroute)
+*   **What it does:** The ultimate diagnostic tool. It combines the functionality of `ping` and `traceroute` into a single, real-time, dynamically updating dashboard. It shows packet loss and latency for every single hop along the route simultaneously.
+*   **How to use it:**
+    ```bash
+    mtr google.com
+    ```
+*   **Important Flags:**
+    *   `-r`: (Report mode) Instead of opening an interactive dashboard, it runs the test in the background and prints a final, clean text report. Perfect for saving to log files.
+    *   `-c [number]`: Sets how many ping cycles to run before generating the report.
+
+### 5. `netstat` (Network Statistics)
+*   **What it does:** The Cloud Security Engineer's radar. It shows you exactly which ports are open on your machine, who is currently connected to them, and what services are listening for traffic. 
+*   **How to use it:**
+    ```bash
+    netstat
+    
+```
+*   **Important Flags (The Holy Grail Combo):**
+    Security engineers almost always use this exact combination of flags:
+    ```bash
+    sudo netstat -tulpn
+    ```
+    *   `-t`: Show **TCP** ports.
+    *   `-u`: Show **UDP** ports.
+    *   `-l`: Show only **Listening** ports (doors waiting for a connection).
+    *   `-p`: Show the **Program** (PID/Process Name) using that port.
+    *   `-n`: Show **Numeric** IP addresses and port numbers (skips slow DNS lookups).
+```
+
 ---
 *Note: This playbook is a living document. As I learn more and encounter new DevOps concepts, I am going to continually update this list.*
