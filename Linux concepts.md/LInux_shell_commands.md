@@ -326,6 +326,18 @@ These commands form the foundation of network troubleshooting and security audit
     *   `-p`: Show the **Program** (PID/Process Name) using that port.
     *   `-n`: Show **Numeric** IP addresses and port numbers (skips slow DNS lookups).
 ```
+---
 
+### 6. 'ss -tulpn' 
+
+* **`ss`** : Socket Statistics (modern replacement for `netstat`).
+  * `-t` : **TCP** (shows connections using the "handshake" protocol).
+  * `-u` : **UDP** (shows "fire and forget" protocol connections).
+  * `-l` : **Listening** (shows only the ports waiting for incoming connections).
+  * `-p` : **Process** (shows the name of the program using the port—requires `sudo`).
+  * `-n` : **Numeric** (shows port numbers as digits instead of service names).
+  * `-tulpn` : **Combined** (the "gold standard" for a full security audit of open doors and the programs behind them).
+ 
+  * 
 ---
 *Note: This playbook is a living document. As I learn more and encounter new DevOps concepts, I am going to continually update this list.*
